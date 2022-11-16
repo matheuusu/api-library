@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 mongoose.connect(
-  'mongodb+srv://mattusz:adlc8459.@cluster0.0zl2xjv.mongodb.net/alura-node'
+  'mongodb+srv://mattusz:123@cluster0.adqgfzv.mongodb.net/alura-node'
 )
 
 const db = mongoose.connection

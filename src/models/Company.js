@@ -9,6 +9,6 @@ const companySchema = new mongoose.Schema(
   { versionKey: false }
 )
 
-const companies = mongoose.model('Companies', companySchema)
+const companies = mongoose.model('companies', companySchema)
 
 export default companies
