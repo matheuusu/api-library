@@ -1,22 +1,32 @@
 import books from '../models/Book.js'
 
-class bookController {
+class BookController {
   static listBook = (req, res) => {
-    books.find((err, book) => {
-      res.status(200).json(book)
-    })
+    books
+      .find()
+      .populate('author', 'name')
+      .populate('company', 'name')
+      .exec((err, book) => {
+        res.status(200).json(book)
+      })
   }
 
   static listBookById = (req, res) => {
     const id = req.params.id
 
-    books.findById(id, (err, book) => {
-      if (err) {
-        res.status(400).json({ message: `${err.message} - book id not found` })
-      } else {
-        res.status(200).json(book)
-      }
-    })
+    books
+      .findById(id)
+      .populate('author')
+      .populate('company')
+      .exec((err, book) => {
+        if (err) {
+          res
+            .status(400)
+            .json({ message: `${err.message} - book id not found` })
+        } else {
+          res.status(200).json(book)
+        }
+      })
   }
 
   static createBook = (req, res) => {
@@ -38,7 +48,7 @@ class bookController {
 
     books.findByIdAndUpdate(id, { $set: req.body }, err => {
       if (!err) {
-        res.status(200).json({ message: 'the book has updated successfully' })
+        res.status(200).json({ message: 'the update was successful' })
       } else {
         res
           .status(500)
@@ -62,4 +72,4 @@ class bookController {
   }
 }
 
-export default bookController
+export default BookController
